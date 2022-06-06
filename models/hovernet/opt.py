@@ -1,4 +1,6 @@
+from math import gamma
 import torch.optim as optim
+import pdb
 
 from run_utils.callbacks.base import (
     AccumulateRawOutput,
@@ -21,6 +23,7 @@ from .run_desc import proc_valid_step_output, train_step, valid_step, viz_step_o
 # TODO: training config only ?
 # TODO: switch all to function name String for all option
 def get_config(nr_type, mode):
+
     return {
         # ------------------------------------------------------------------
         # ! All phases have the same number of run engine
@@ -37,12 +40,13 @@ def get_config(nr_type, mode):
                         "optimizer": [
                             optim.Adam,
                             {  # should match keyword for parameters within the optimizer
-                                "lr": 1.0e-4,  # initial learning rate,
-                                "betas": (0.9, 0.999),
+                                "lr": 0.001,  # initial learning rate
+                                "betas":(0.9, 0.999),
+                                "weight_decay":0.1
                             },
                         ],
                         # learning rate scheduler
-                        "lr_scheduler": lambda x: optim.lr_scheduler.StepLR(x, 25),
+                        "lr_scheduler": lambda x: optim.lr_scheduler.StepLR(x, 25, gamma=0.3),
                         "extra_info": {
                             "loss": {
                                 "np": {"bce": 1, "dice": 1},
@@ -52,8 +56,8 @@ def get_config(nr_type, mode):
                         },
                         # path to load, -1 to auto load checkpoint from previous phase,
                         # None to start from scratch
-                        "pretrained": "../pretrained/ImageNet-ResNet50-Preact_pytorch.tar",
-                        # 'pretrained': None,
+                        "pretrained": './pretrained/nvidia_resnext101-32x4d_200821.pth.tar',
+                        #'pretrained': None,
                     },
                 },
                 "target_info": {"gen": (gen_targets, {}), "viz": (prep_sample, {})},
@@ -71,8 +75,10 @@ def get_config(nr_type, mode):
                         "optimizer": [
                             optim.Adam,
                             {  # should match keyword for parameters within the optimizer
-                                "lr": 1.0e-4,  # initial learning rate,
-                                "betas": (0.9, 0.999),
+                                "lr": 0.001,  # initial learning rate, 
+                                "betas":(0.9,0.999),
+                                "weight_decay":0.1
+                        
                             },
                         ],
                         # learning rate scheduler
@@ -88,7 +94,8 @@ def get_config(nr_type, mode):
                         # None to start from scratch
                         "pretrained": -1,
                     },
-                },
+                }, 
+                
                 "target_info": {"gen": (gen_targets, {}), "viz": (prep_sample, {})},
                 "batch_size": {"train": 4, "valid": 8,}, # batch size per gpu
                 "nr_epochs": 50,

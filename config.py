@@ -1,6 +1,6 @@
 import importlib
 import random
-
+import pdb
 import cv2
 import numpy as np
 
@@ -45,14 +45,14 @@ class Config(object):
                 raise Exception("If using `fast` mode, input shape must be [256,256] and output shape must be [164,164]")
 
         self.dataset_name = "consep" # extracts dataset info from dataset.py
-        self.log_dir = "logs/" # where checkpoints will be saved
+        self.log_dir = "dataset/checkpoints/Res101_weight_decay_0.1" # where checkpoints will be saved
 
         # paths to training and validation patches
         self.train_dir_list = [
-            "train_patches_path"
+            "dataset/training_data/consep/consep/train/540x540_164x164/"
         ]
         self.valid_dir_list = [
-            "valid_patches_path"
+            "dataset/training_data/consep/consep/valid/540x540_164x164/"
         ]
 
         self.shape_info = {

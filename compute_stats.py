@@ -1,7 +1,7 @@
 import argparse
 import cProfile as profile
 import glob
-import os
+import os, pdb
 
 import cv2
 import numpy as np
@@ -190,7 +190,7 @@ def run_nuclei_inst_stat(pred_dir, true_dir, print_img_stats=False, ext=".mat"):
     for filename in file_list[:]:
         filename = os.path.basename(filename)
         basename = filename.split(".")[0]
-
+        #pdb.set_trace()
         true = sio.loadmat(os.path.join(true_dir, basename + ".mat"))
         true = (true["inst_map"]).astype("int32")
 
@@ -202,12 +202,14 @@ def run_nuclei_inst_stat(pred_dir, true_dir, print_img_stats=False, ext=".mat"):
         true = remap_label(true, by_size=False)
 
         pq_info = get_fast_pq(true, pred, match_iou=0.5)[0]
+        
         metrics[0].append(get_dice_1(true, pred))
         metrics[1].append(get_fast_aji(true, pred))
         metrics[2].append(pq_info[0])  # dq
         metrics[3].append(pq_info[1])  # sq
         metrics[4].append(pq_info[2])  # pq
         metrics[5].append(get_fast_aji_plus(true, pred))
+        
 
         if print_img_stats:
             print(basename, end="\t")
@@ -218,10 +220,60 @@ def run_nuclei_inst_stat(pred_dir, true_dir, print_img_stats=False, ext=".mat"):
     metrics = np.array(metrics)
     metrics_avg = np.mean(metrics, axis=-1)
     np.set_printoptions(formatter={"float": "{: 0.5f}".format})
+    print(['Dice', 'AJI', 'DQ', 'SQ', 'PQ', 'Fast AJI'])
     print(metrics_avg)
     metrics_avg = list(metrics_avg)
     return metrics
 
+def run_nuclei_inst_stat_one(pred_dir, true_dir, image, print_img_stats=False, ext=".mat"):
+    # print stats of each image
+    print(pred_dir)
+    
+    num_image = image
+    
+    file_list = glob.glob("%s/*%s" % (pred_dir, ext))
+    file_list.sort()  # ensure same order
+
+    
+    metrics = [[], [], [], [], [], []]
+    for filename in file_list[:]:
+    
+        if str(num_image) in filename[-12:]:
+        
+            pos = file_list.index(filename)
+            path = file_list[pos]
+            
+    path = os.path.basename(path)        
+    basename = path.split(".")[0]
+    #pdb.set_trace()
+
+    true = sio.loadmat(os.path.join(true_dir, basename + ".mat"))
+    true = (true["inst_map"]).astype("int32")
+
+    pred = sio.loadmat(os.path.join(pred_dir, basename + ".mat"))
+    pred = (pred["inst_map"]).astype("int32")
+
+    # to ensure that the instance numbering is contiguous
+    pred = remap_label(pred, by_size=False)
+    true = remap_label(true, by_size=False)
+
+    pq_info = get_fast_pq(true, pred, match_iou=0.5)[0]
+        
+    metrics[0].append(get_dice_1(true, pred))
+    metrics[1].append(get_fast_aji(true, pred))
+    metrics[2].append(pq_info[0])  # dq
+    metrics[3].append(pq_info[1])  # sq
+    metrics[4].append(pq_info[2])  # pq
+    metrics[5].append(get_fast_aji_plus(true, pred))
+        
+    ####
+    metrics = np.array(metrics)
+    metrics_avg = np.mean(metrics, axis=-1)
+    np.set_printoptions(formatter={"float": "{: 0.5f}".format})
+    print(['Dice', 'AJI', 'DQ', 'SQ', 'PQ', 'Fast AJI'])
+    print(metrics_avg)
+    metrics_avg = list(metrics_avg)
+    return metrics
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

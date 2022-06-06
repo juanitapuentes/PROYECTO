@@ -200,7 +200,7 @@ class TrainManager(Config):
                             k: torch.from_numpy(v) for k, v in net_state_dict.items()
                         }
                     elif chkpt_ext == "tar":  # ! assume same saving format we desire
-                        net_state_dict = torch.load(pretrained_path)["desc"]
+                        net_state_dict = torch.load(pretrained_path)#["desc"]
 
                 colored_word = colored(net_name, color="red", attrs=["bold"])
                 print(
