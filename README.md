@@ -110,7 +110,7 @@ net_state_dict = torch.load(pretrained_path) #["desc"]
  Enjoy✨
 
 
-# REFERENCES
+# References
 
 ```
 Graham, S., Vu, Q. D., Raza, S. E. A., Azam, A., Tsang, Y. W., Kwak, J. T., & Rajpoot, N. (2019). Hover-net: Simultaneous segmentation and classification of nuclei in multi-tissue histology images. Medical Image Analysis, 58, 101563.
