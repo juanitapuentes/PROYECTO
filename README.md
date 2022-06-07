@@ -12,14 +12,14 @@ In order to be able to correctly perform the following stages, you first need to
 
 | Information | Softlink |
 | ------ | ------ |
-| Dataset | ln -s "/media/user_home0/jpuentes/PROYECTO/DATA/Final_Projects/Panoptic_Segmentation_Cell-Types_Nuclei/CoNSeP/" "**path to dataset folder**"|
-| Patches | ln -s "/media/user_home0/jpuentes/PROYECTO/DATA/Final_Projects/Panoptic_Segmentation_Cell-Types_Nuclei/training_data/ "**path to dataset folder**"|
-| ResNet50 pretrained | ln -s "/media/user_home0/lvacostac/Vision/Final_Project/PROYECTO/hover_net/DATA/Final_Projects/Panoptic_Segmentation_Cell-Types_Nuclei/pretrained/ImageNet-ResNet50-Preact_pytorch.tar" "**path to pretrained folder**"|
-| ResNet101 pretrained | ln -s "/media/user_home0/lvacostac/Vision/Final_Project/PROYECTO/hover_net/DATA/Final_Projects/Panoptic_Segmentation_Cell-Types_Nuclei/pretrained/nvidia_resnext101-32x4d_200821.pth.tar" "**path to pretrained folder**"|
-| ResNet50 checkpoints | ln -s "/media/user_home0/jpuentes/PROYECTO/DATA/Final_Projects/Panoptic_Segmentation_Cell-Types_Nuclei/checkpoints/" "**path to dataset folder**"|
-| ResNet101 checkpoints | ln -s "/media/user_home0/lvacostac/Vision/Final_Project/PROYECTO/hover_net/DATA/Final_Projects/Panoptic_Segmentation_Cell-Types_Nuclei/CHECKPOINTS/" "**path to dataset folder**"|
-| ResNet50 sample tiles | ln -s "/media/user_home0/jpuentes/PROYECTO/DATA/Final_Projects/Panoptic_Segmentation_Cell-Types_Nuclei/sample_tiles/" "**path to dataset folder**"|
-| ResNet101 sample tiles | ln -s "/media/user_home0/lvacostac/Vision/Final_Project/PROYECTO/hover_net/DATA/Final_Projects/Panoptic_Segmentation_Cell-Types_Nuclei/sample__tiles/" "**path to dataset folder**"|
+| Dataset | ln -s "/media/user_home0/jpuentes/PROYECTO/dataset/CoNSeP/" "**path to dataset folder**"|
+| Patches | ln -s "/media/user_home0/jpuentes/PROYECTO/dataset/training_data/ "**path to dataset folder**"|
+| ResNet50 pretrained | ln -s "/media/user_home0/lvacostac/Vision/Final_Project/PROYECTO/hover_net/pretrained/ImageNet-ResNet50-Preact_pytorch.tar" "**path to pretrained folder**"|
+| ResNet101 pretrained | ln -s "/media/user_home0/lvacostac/Vision/Final_Project/PROYECTO/hover_net/pretrained/nvidia_resnext101-32x4d_200821.pth.tar" "**path to pretrained folder**"|
+| ResNet50 checkpoints | ln -s "/media/user_home0/jpuentes/PROYECTO/dataset/checkpoints/" "**path to dataset folder**"|
+| ResNet101 checkpoints | ln -s "/media/user_home0/lvacostac/Vision/Final_Project/PROYECTO/hover_net/dataset/CHECKPOINTS/" "**path to dataset folder**"|
+| ResNet50 sample tiles | ln -s "/media/user_home0/jpuentes/PROYECTO/dataset/sample_tiles/" "**path to dataset folder**"|
+| ResNet101 sample tiles | ln -s "/media/user_home0/lvacostac/Vision/Final_Project/PROYECTO/hover_net/dataset/sample__tiles/" "**path to dataset folder**"|
 
 
 ## Training stage
@@ -108,6 +108,8 @@ net_state_dict = torch.load(pretrained_path) #["desc"]
  If you have any doubts or questions, do not hesitate to contact us through this repository
  
  Enjoy✨
+
+
 
 
 # References
