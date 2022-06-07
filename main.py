@@ -12,8 +12,8 @@ parser.add_argument('--img', type=int, help='an integer indicating the image num
 
 args = parser.parse_args()
 
-pred_dir = '/media/user_home0/lvacostac/Vision/Final_Project/PROYECTO/hover_net/DATA/Final_Projects/Panoptic_Segmentation_Cell-Types_Nuclei/sample__tiles/pred/ResNet101_16_0.001_Adam_50/mat/'
-true_dir = '/media/user_home0/jpuentes/PROYECTO/DATA/Final_Projects/Panoptic_Segmentation_Cell-Types_Nuclei/CoNSeP/Test/Labels/'
+pred_dir = '/media/user_home0/lvacostac/Vision/Final_Project/PROYECTO/hover_net/dataset/sample__tiles/pred/ResNet101_16_0.001_Adam_50/mat/'
+true_dir = '/media/user_home0/jpuentes/CoNSeP/Test/Labels/'
 
 if args.mode == 'test':
     run_nuclei_inst_stat(pred_dir, true_dir, print_img_stats=False)
